@@ -6,7 +6,8 @@ class Chromatic.GalleryPhotoView
     @photo  = photo
     @el     = $('<div class="chromatic-gallery-photo"/>')
     parent.el.append(@el)
-    @el.on  'click', @zoom
+    @onclickFunc = if typeof options.click == 'function' then bind(options.click, @) else @zoom
+    @el.on  'click', @onclickFunc
 
   load: (callback) =>
     return if @loaded
